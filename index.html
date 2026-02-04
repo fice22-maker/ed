@@ -17,13 +17,17 @@
         }
 
         .glass-nav {
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .hero-gradient {
-            background: radial-gradient(circle at center, rgba(251, 191, 36, 0.15) 0%, transparent 70%);
+        /* Hero pozadina sa slikom i gradijentom */
+        .hero-bg-overlay {
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.8)), 
+                        url('https://images.unsplash.com/photo-1454165833767-027eeea160a7?auto=format&fit=crop&q=60&w=1600');
+            background-size: cover;
+            background-position: center;
         }
 
         .animate-reveal {
@@ -83,7 +87,7 @@
                     <i class="fas fa-bolt"></i>
                 </div>
                 <div>
-                    <span class="block font-bold text-xl tracking-tighter leading-none">ELEKTRODINAMIKA</span>
+                    <span class="block font-bold text-xl tracking-tighter leading-none uppercase">Elektrodinamika</span>
                     <span class="text-[10px] text-yellow-500 font-mono tracking-widest uppercase">Vedrine - Trilj</span>
                 </div>
             </a>
@@ -111,15 +115,15 @@
         <a href="#kontakt" onclick="toggleMenu()">Kontakt</a>
     </div>
 
-    <!-- Hero Section -->
-    <section id="pocetna" class="relative min-h-screen flex items-center pt-20 hero-gradient">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+    <!-- Hero Section sa slikom u pozadini -->
+    <section id="pocetna" class="relative min-h-screen flex items-center pt-20 hero-bg-overlay">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
             <div class="animate-reveal">
                 <div class="inline-block px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-mono mb-6">
                     OD 2007. GODINE SA VAMA
                 </div>
-                <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
-                    ENERGIJA <br><span class="text-neutral-600">BEZ PREKIDA.</span>
+                <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8 uppercase">
+                    Energija <br><span class="text-neutral-500">bez prekida.</span>
                 </h1>
                 <p class="text-neutral-400 text-lg max-w-md mb-10 font-light">
                     Vrhunski elektroinstalacijski radovi, održavanje i ispitivanje instalacija. Sigurnost vaših objekata je naš prioritet u Vedrinama i cijeloj Hrvatskoj.
@@ -135,20 +139,23 @@
             </div>
 
             <div class="relative animate-reveal" style="transition-delay: 0.2s">
-                <div class="hero-image-container relative w-full aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800" 
-                         alt="Električar na radu" 
+                <div class="hero-image-container relative w-full aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?auto=format&fit=crop&q=80&w=800" 
+                         alt="[Slika električnog ormarića i preciznih instalacija]" 
                          class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/20"></div>
                     <div class="absolute bottom-6 left-6 right-6 z-10 text-center p-6 bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl">
-                        <h3 class="text-yellow-500 font-mono text-xs mb-2 uppercase tracking-widest">/ Profesionalni standard</h3>
-                        <p class="text-xl font-bold">Kvalitet na koji se možete osloniti</p>
+                        <h3 class="text-yellow-500 font-mono text-xs mb-2 uppercase tracking-widest">/ Sigurnost i Pouzdanost</h3>
+                        <p class="text-xl font-bold">Moderni elektro sustavi</p>
                     </div>
                 </div>
                 <!-- Dekorativni element -->
-                <div class="absolute -top-6 -right-6 w-24 h-24 bg-yellow-500/10 rounded-full blur-3xl"></div>
+                <div class="absolute -top-6 -right-6 w-32 h-32 bg-yellow-500/20 rounded-full blur-3xl"></div>
             </div>
         </div>
+        
+        <!-- Blagi gradient pri dnu za prijelaz -->
+        <div class="absolute bottom-0 w-full h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
     </section>
 
     <!-- Usluge -->
@@ -156,8 +163,8 @@
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-end mb-20 border-b border-white/5 pb-10 animate-reveal">
                 <div>
-                    <p class="font-mono text-yellow-500 text-sm mb-4">ŠTA RADIMO / 01-04</p>
-                    <h2 class="text-4xl md:text-5xl font-black">NAŠE EKSPERTIZE</h2>
+                    <p class="font-mono text-yellow-500 text-sm mb-4 uppercase">Što radimo / 01-04</p>
+                    <h2 class="text-4xl md:text-5xl font-black uppercase">Naše ekspertize</h2>
                 </div>
                 <p class="text-neutral-500 max-w-xs text-sm mt-4 md:mt-0">Sveobuhvatna rješenja za stambene, poslovne i industrijske objekte.</p>
             </div>
@@ -165,22 +172,22 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="p-8 border border-white/5 bg-neutral-900/20 rounded-xl card-hover transition-all animate-reveal">
                     <i class="fas fa-plug text-yellow-500 text-3xl mb-6"></i>
-                    <h4 class="text-xl font-bold mb-4">Instalacije</h4>
+                    <h4 class="text-xl font-bold mb-4 uppercase">Instalacije</h4>
                     <p class="text-neutral-400 text-sm font-light">Izvođenje instalacija jake i slabe struje za sve vrste građevina.</p>
                 </div>
                 <div class="p-8 border border-white/5 bg-neutral-900/20 rounded-xl card-hover transition-all animate-reveal" style="transition-delay: 0.1s">
                     <i class="fas fa-shield-alt text-yellow-500 text-3xl mb-6"></i>
-                    <h4 class="text-xl font-bold mb-4">Ispitivanja</h4>
+                    <h4 class="text-xl font-bold mb-4 uppercase">Ispitivanja</h4>
                     <p class="text-neutral-400 text-sm font-light">Stručna provjera ispravnosti i izdavanje atesta za sigurnost sistema.</p>
                 </div>
                 <div class="p-8 border border-white/5 bg-neutral-900/20 rounded-xl card-hover transition-all animate-reveal" style="transition-delay: 0.2s">
                     <i class="fas fa-tools text-yellow-500 text-3xl mb-6"></i>
-                    <h4 class="text-xl font-bold mb-4">Održavanje</h4>
+                    <h4 class="text-xl font-bold mb-4 uppercase">Održavanje</h4>
                     <p class="text-neutral-400 text-sm font-light">Redovni servisi i hitne intervencije na elektro-mrežama.</p>
                 </div>
                 <div class="p-8 border border-white/5 bg-neutral-900/20 rounded-xl card-hover transition-all animate-reveal" style="transition-delay: 0.3s">
                     <i class="fas fa-lightbulb text-yellow-500 text-3xl mb-6"></i>
-                    <h4 class="text-xl font-bold mb-4">Rasvjeta</h4>
+                    <h4 class="text-xl font-bold mb-4 uppercase">Rasvjeta</h4>
                     <p class="text-neutral-400 text-sm font-light">Projektovanje i montaža unutrašnje i vanjske LED rasvjete.</p>
                 </div>
             </div>
@@ -191,7 +198,7 @@
     <section id="o-nama" class="py-32 bg-neutral-900/30">
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
             <div class="animate-reveal">
-                <h2 class="text-5xl font-black mb-8 leading-tight">POUZDAN PARTNER <br><span class="text-yellow-500">U SVAKOM SPOJU.</span></h2>
+                <h2 class="text-5xl font-black mb-8 leading-tight uppercase">Pouzdan partner <br><span class="text-yellow-500">u svakom spoju.</span></h2>
                 <div class="space-y-6 text-neutral-400 font-light">
                     <p>Elektrodinamika d.o.o. sa sjedištem u Vedrinama (Trilj) je sinonim za kvalitet u elektroindustriji. Naš tim čine stručnjaci sa dugogodišnjim iskustvom.</p>
                     <ul class="space-y-4">
@@ -224,7 +231,7 @@
     <section id="kontakt" class="py-40 px-6">
         <div class="max-w-7xl mx-auto bg-yellow-500 rounded-[3rem] p-12 md:p-24 text-black text-center relative overflow-hidden">
             <div class="relative z-10">
-                <h2 class="text-4xl md:text-7xl font-black tracking-tighter mb-8">TREBATE STRUČAN SAVJET?</h2>
+                <h2 class="text-4xl md:text-7xl font-black tracking-tighter mb-8 uppercase">Trebate stručan savjet?</h2>
                 <p class="text-xl mb-12 max-w-xl mx-auto font-medium opacity-80">Kontaktirajte nas danas za besplatnu procjenu vašeg projekta.</p>
                 <div class="flex flex-col md:flex-row justify-center items-center gap-6">
                     <a href="tel:+38521831820" class="w-full md:w-auto px-10 py-5 bg-black text-white font-bold rounded-full hover:scale-105 transition-transform flex items-center justify-center">
