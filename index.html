@@ -62,6 +62,13 @@
         #mobile-menu {
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        .hero-image-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #0a0a0a, transparent);
+        }
     </style>
 </head>
 <body class="overflow-x-hidden">
@@ -106,7 +113,7 @@
 
     <!-- Hero Section -->
     <section id="pocetna" class="relative min-h-screen flex items-center pt-20 hero-gradient">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
             <div class="animate-reveal">
                 <div class="inline-block px-3 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-mono mb-6">
                     OD 2007. GODINE SA VAMA
@@ -127,14 +134,19 @@
                 </div>
             </div>
 
-            <div class="hidden lg:flex justify-center items-center animate-reveal" style="transition-delay: 0.2s">
-                <div class="relative w-full aspect-square border border-white/5 rounded-3xl bg-neutral-900/50 flex items-center justify-center overflow-hidden">
-                    <i class="fas fa-charging-station text-[200px] text-white/5 absolute"></i>
-                    <div class="relative z-10 text-center p-12 bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl">
-                        <h3 class="text-yellow-500 font-mono text-xs mb-2">/ TRENUTNI STATUS</h3>
-                        <p class="text-xl font-bold">Spremni za nove projekte</p>
+            <div class="relative animate-reveal" style="transition-delay: 0.2s">
+                <div class="hero-image-container relative w-full aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800" 
+                         alt="Električar na radu" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/20"></div>
+                    <div class="absolute bottom-6 left-6 right-6 z-10 text-center p-6 bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl">
+                        <h3 class="text-yellow-500 font-mono text-xs mb-2 uppercase tracking-widest">/ Profesionalni standard</h3>
+                        <p class="text-xl font-bold">Kvalitet na koji se možete osloniti</p>
                     </div>
                 </div>
+                <!-- Dekorativni element -->
+                <div class="absolute -top-6 -right-6 w-24 h-24 bg-yellow-500/10 rounded-full blur-3xl"></div>
             </div>
         </div>
     </section>
