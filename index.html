@@ -1,0 +1,333 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  ExternalLink, 
+  Github, 
+  Linkedin, 
+  Mail, 
+  ChevronRight, 
+  Code, 
+  Palette, 
+  Layers, 
+  Cpu, 
+  Globe, 
+  ArrowUpRight,
+  Menu,
+  X,
+  Send,
+  Zap,
+  ShieldCheck,
+  Tool,
+  MapPin,
+  Phone,
+  Clock,
+  Settings
+} from 'lucide-react';
+
+/**
+ * Moderni Dizajn Tokeni i Konstante
+ */
+const COLORS = {
+  bg: 'bg-[#0a0a0a]',
+  surface: 'bg-[#141414]',
+  accent: 'text-[#fbbf24]', // Zlatno-žuta za elektro industriju
+  border: 'border-white/10',
+  textMuted: 'text-neutral-400',
+  textPrimary: 'text-white'
+};
+
+const PROJECTS = [
+  {
+    id: 1,
+    title: "Industrijska Postrojenja",
+    category: "Elektroinstalacije",
+    description: "Projektovanje i izvođenje kompletnih elektro-sistema za proizvodne hale.",
+    tags: ["VN/NN", "Automatizacija", "Održavanje"],
+    color: "from-yellow-500 to-orange-600"
+  },
+  {
+    id: 2,
+    title: "Pametne Zgrade",
+    category: "Tehnička rješenja",
+    description: "Implementacija sistema pametnog upravljanja energijom i rasvjetom.",
+    tags: ["KNX", "Smart Home", "Energetska efikasnost"],
+    color: "from-blue-500 to-cyan-600"
+  },
+  {
+    id: 3,
+    title: "Javna Rasvjeta",
+    category: "Infrastruktura",
+    description: "Modernizacija gradske rasvjete sa LED tehnologijom visokih performansi.",
+    tags: ["LED", "Infrastruktura", "Ušteda"],
+    color: "from-gray-500 to-neutral-700"
+  }
+];
+
+const SERVICES = [
+  { icon: Zap, name: "Elektroinstalacije", desc: "Izvođenje svih vrsta instalacija jake i slabe struje." },
+  { icon: ShieldCheck, name: "Gromobranski sistemi", desc: "Zaštita objekata od atmosferskih pražnjenja po najvišim standardima." },
+  { icon: Settings, name: "Održavanje mreža", desc: "Redovno servisiranje i hitne intervencije na elektro-mrežama." },
+  { icon: Clock, name: "Hitne intervencije", desc: "Brz odziv na terenu za sanaciju kvarova i kritičnih stanja." }
+];
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState('home');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [scrolled, setScrolled] = useState(false);
+
+  // Efekat glatkog skrolovanja
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleMouseMove = (e) => setMousePos({ x: e.clientX, y: e.clientY });
+    
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
+  const scrollToSection = (id) => {
+    setActiveTab(id);
+    setIsMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const NavLink = ({ id, label }) => (
+    <button 
+      onClick={() => scrollToSection(id)}
+      className={`relative px-4 py-2 transition-colors duration-300 text-sm font-medium
+        ${activeTab === id ? 'text-white' : 'text-neutral-500 hover:text-white'}`}
+    >
+      {label}
+      {activeTab === id && (
+        <div className="absolute bottom-0 left-0 w-full h-[2px] bg-yellow-500 rounded-full" />
+      )}
+    </button>
+  );
+
+  return (
+    <div className={`min-h-screen ${COLORS.bg} ${COLORS.textPrimary} font-sans selection:bg-yellow-500/30 overflow-x-hidden`}>
+      
+      {/* Prilagođeni kursor (samo za desktop) */}
+      <div 
+        className="fixed pointer-events-none z-50 w-8 h-8 rounded-full border border-yellow-500 hidden md:block transition-transform duration-100 ease-out"
+        style={{ transform: `translate(${mousePos.x - 16}px, ${mousePos.y - 16}px)` }}
+      />
+
+      {/* Navigacija */}
+      <nav className={`fixed top-0 w-full z-40 transition-all duration-300 border-b ${scrolled ? 'bg-[#0a0a0a]/80 backdrop-blur-xl py-4 border-white/5' : 'bg-transparent py-8 border-transparent'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center space-x-2 group cursor-pointer" onClick={() => scrollToSection('home')}>
+            <div className="w-10 h-10 bg-yellow-500 rounded flex items-center justify-center font-black text-xl text-black group-hover:rotate-12 transition-transform">
+              <Zap size={24} />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-bold tracking-tighter text-xl leading-none">ELEKTRODINAMIKA</span>
+              <span className="text-[10px] text-yellow-500 font-mono tracking-[0.2em]">VEDRINE - TRILJ</span>
+            </div>
+          </div>
+
+          <div className="hidden md:flex space-x-4">
+            <NavLink id="home" label="Početna" />
+            <NavLink id="services" label="Usluge" />
+            <NavLink id="projects" label="Projekti" />
+            <NavLink id="contact" label="Kontakt" />
+          </div>
+
+          <button 
+            className="md:hidden p-2 text-white" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobilni meni */}
+      <div className={`fixed inset-0 z-30 bg-black transition-transform duration-500 ease-in-out md:hidden flex flex-col items-center justify-center space-y-8 ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
+        <NavLink id="home" label="Početna" />
+        <NavLink id="services" label="Usluge" />
+        <NavLink id="projects" label="Projekti" />
+        <NavLink id="contact" label="Kontakt" />
+      </div>
+
+      {/* Hero sekcija */}
+      <main className="pt-32 pb-20 px-6">
+        <section id="home" className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
+          <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-yellow-400">
+              <span className="relative flex h-2 w-2 mr-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
+              </span>
+              LICENCIRANI IZVOĐAČ RADOVA
+            </div>
+            <h1 className="text-6xl md:text-8xl font-black leading-[0.9] tracking-tighter uppercase">
+              Energija <br /> 
+              <span className="text-neutral-500 hover:text-yellow-500 transition-colors cursor-default">u pokretu.</span>
+            </h1>
+            <p className="max-w-md text-lg text-neutral-400 leading-relaxed font-light">
+              Specijalizovani za vrhunska elektroinstalacijska rješenja u regiji Trilj i šire. Kvalitet, sigurnost i pouzdanost od 2007. godine.
+            </p>
+            <div className="flex flex-wrap gap-4 pt-4">
+              <button 
+                onClick={() => scrollToSection('services')}
+                className="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-4 rounded-sm font-bold transition-all hover:translate-y-[-2px] flex items-center group"
+              >
+                Naše Usluge 
+                <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
+              </button>
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="border border-white/10 hover:bg-white/5 px-8 py-4 rounded-sm font-bold transition-all"
+              >
+                Zatraži Ponudu
+              </button>
+            </div>
+          </div>
+
+          <div className="relative group hidden lg:block">
+            <div className="absolute inset-0 bg-yellow-500/20 blur-[120px] rounded-full group-hover:bg-yellow-500/30 transition-all"></div>
+            <div className="relative aspect-square rounded-2xl border border-white/10 overflow-hidden bg-gradient-to-br from-neutral-800 to-neutral-900 shadow-2xl">
+              <div className="absolute inset-0 grid grid-cols-12 opacity-10">
+                {[...Array(144)].map((_, i) => (
+                  <div key={i} className="border-[0.5px] border-white/20"></div>
+                ))}
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                 <Zap size={240} className="text-white/5 animate-pulse" />
+              </div>
+              <div className="absolute bottom-10 left-10 p-6 bg-black/60 backdrop-blur-md border border-white/10 rounded-xl max-w-xs">
+                <p className="text-sm font-mono text-yellow-400 mb-2">/ Lokacija</p>
+                <div className="flex items-center text-xs text-neutral-300 space-x-2">
+                  <MapPin size={14} />
+                  <span>Vedrine 104, 21240 Trilj, Hrvatska</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Usluge / Expertiza */}
+        <section id="services" className="max-w-7xl mx-auto pt-40 grid lg:grid-cols-2 gap-20">
+          <div className="sticky top-32 h-fit space-y-8">
+            <h2 className="text-5xl font-black tracking-tight leading-none uppercase">
+              Vrhunska <br />
+              Tehnička <br />
+              <span className="text-yellow-500">Rješenja.</span>
+            </h2>
+            <div className="w-24 h-1 bg-yellow-500"></div>
+            <p className="text-neutral-400 text-lg max-w-md">
+              Kombinujemo decenijsko iskustvo sa modernim tehnologijama kako bismo osigurali stabilnost vašeg energetskog sistema.
+            </p>
+            <div className="space-y-4 pt-4">
+                <div className="flex items-center space-x-3 text-sm font-mono">
+                    <Phone className="text-yellow-500" size={16} />
+                    <span>Kontakt: +385 21 831 820</span>
+                </div>
+                <div className="flex items-center space-x-3 text-sm font-mono">
+                    <Clock className="text-yellow-500" size={16} />
+                    <span>Pon-Pet: 07:00 - 15:00</span>
+                </div>
+            </div>
+          </div>
+
+          <div className="grid gap-4">
+            {SERVICES.map((s, idx) => (
+              <div key={idx} className="p-8 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all group flex items-start space-x-6">
+                <div className="p-4 rounded-lg bg-yellow-500/10 text-yellow-500 group-hover:bg-yellow-500 group-hover:text-black transition-all">
+                  <s.icon size={28} />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold mb-2">{s.name}</h4>
+                  <p className="text-neutral-400 font-light">{s.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Mreža Projekata */}
+        <section id="projects" className="max-w-7xl mx-auto pt-40">
+          <div className="flex justify-between items-end mb-16 border-b border-white/10 pb-8">
+            <div className="space-y-4">
+              <p className="font-mono text-yellow-500 text-sm">REFERENTNA LISTA / 01–03</p>
+              <h2 className="text-4xl font-bold tracking-tight">REALIZOVANI PROJEKTI</h2>
+            </div>
+            <button className="hidden md:flex items-center text-sm font-bold hover:text-yellow-400 transition-colors">
+              POGLEDAJ SVE <ArrowUpRight size={18} className="ml-1" />
+            </button>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {PROJECTS.map((project) => (
+              <div 
+                key={project.id} 
+                className="group relative h-[500px] overflow-hidden rounded-xl border border-white/5 bg-[#141414] hover:border-white/20 transition-all duration-500"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-tr ${project.color} opacity-10 group-hover:opacity-20 transition-opacity`} />
+                
+                <div className="p-8 h-full flex flex-col justify-between relative z-10">
+                  <div className="space-y-4">
+                    <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">{project.category}</span>
+                    <h3 className="text-3xl font-bold group-hover:text-yellow-400 transition-colors">{project.title}</h3>
+                    <p className="text-neutral-400 font-light leading-relaxed">{project.description}</p>
+                  </div>
+                  
+                  <div className="space-y-6">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map(tag => (
+                        <span key={tag} className="text-[10px] px-2 py-1 bg-white/5 border border-white/10 rounded font-mono">{tag}</span>
+                      ))}
+                    </div>
+                    <button className="w-full py-4 border border-white/10 rounded font-bold group-hover:bg-yellow-500 group-hover:text-black transition-all flex items-center justify-center">
+                      Detalji Projekta <ArrowUpRight size={16} className="ml-2" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Footer / Kontakt */}
+        <section id="contact" className="max-w-7xl mx-auto pt-60 pb-20">
+          <div className="bg-yellow-500 rounded-[2rem] p-12 md:p-20 text-center space-y-8 relative overflow-hidden group">
+            <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+            <h2 className="text-4xl md:text-7xl font-black tracking-tighter text-black relative z-10"> TREBATE ELEKTRIČARA?</h2>
+            <p className="text-black/80 text-xl max-w-xl mx-auto relative z-10 font-light">
+              Naš tim je spreman za vaš sljedeći projekat. Kontaktirajte nas za besplatnu procjenu i stručni savjet.
+            </p>
+            <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6 relative z-10 pt-8">
+              <a href="tel:+38521831820" className="w-full md:w-auto px-10 py-5 bg-black text-white font-bold rounded-full hover:scale-105 transition-transform flex items-center justify-center">
+                <Phone size={18} className="mr-2" /> Pozovite nas
+              </a>
+              <div className="flex space-x-4">
+                <button className="p-5 bg-black/10 hover:bg-black/20 rounded-full text-black transition-all">
+                  <Mail size={24} />
+                </button>
+                <button className="p-5 bg-black/10 hover:bg-black/20 rounded-full text-black transition-all">
+                  <MapPin size={24} />
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-20 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-neutral-600 space-y-4 md:space-y-0">
+            <p>© 2024 ELEKTRODINAMIKA D.O.O. VEDRINE. SVA PRAVA ZADRŽANA.</p>
+            <div className="flex space-x-8">
+              <span className="hover:text-white transition-colors cursor-pointer">OIB: 41727781033</span>
+              <span className="hover:text-white transition-colors cursor-pointer">TRILJ, HRVATSKA</span>
+              <p className="text-neutral-500">KVALITET KOJI SVIJETLI</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
