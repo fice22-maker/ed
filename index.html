@@ -22,12 +22,13 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Hero pozadina sa slikom i gradijentom */
+        /* Nova hero pozadina sa slikom i gradijentom */
         .hero-bg-overlay {
-            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.8)), 
-                        url('https://images.unsplash.com/photo-1454165833767-027eeea160a7?auto=format&fit=crop&q=60&w=1600');
+            background: linear-gradient(rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.7)), 
+                        url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=1600');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
         }
 
         .animate-reveal {
@@ -115,7 +116,7 @@
         <a href="#kontakt" onclick="toggleMenu()">Kontakt</a>
     </div>
 
-    <!-- Hero Section sa slikom u pozadini -->
+    <!-- Hero Section sa novom slikom u pozadini -->
     <section id="pocetna" class="relative min-h-screen flex items-center pt-20 hero-bg-overlay">
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
             <div class="animate-reveal">
@@ -141,7 +142,7 @@
             <div class="relative animate-reveal" style="transition-delay: 0.2s">
                 <div class="hero-image-container relative w-full aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
                     <img src="https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?auto=format&fit=crop&q=80&w=800" 
-                         alt="[Slika električnog ormarića i preciznih instalacija]" 
+                         alt="Profesionalne električne instalacije" 
                          class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/20"></div>
                     <div class="absolute bottom-6 left-6 right-6 z-10 text-center p-6 bg-black/60 backdrop-blur-md border border-white/10 rounded-2xl">
@@ -158,6 +159,7 @@
         <div class="absolute bottom-0 w-full h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent"></div>
     </section>
 
+    <!-- Ostatak sekcija (Usluge, O nama, Kontakt, Footer) ostaje isti -->
     <!-- Usluge -->
     <section id="usluge" class="py-32 px-6">
         <div class="max-w-7xl mx-auto">
